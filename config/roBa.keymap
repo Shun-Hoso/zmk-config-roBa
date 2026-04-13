@@ -8,7 +8,11 @@
 
 &mt {
     flavor = "balanced";
-    quick-tap-ms = <0>;
+    quick-tap-ms = <175>;
+};
+
+&lt {
+    quick-tap-ms = <175>;
 };
 
 &trackball {
@@ -41,7 +45,7 @@
         };
 
         eisu {
-            bindings = <&to_layer_0 LANGUAGE_2>;
+            bindings = <&to_layer_0 LANGUAGE_1>;
             key-positions = <11 10>;
             require-prior-idle-ms = <150>;
         };
@@ -74,6 +78,7 @@
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
         };
 
         encoder_msc_down_up: encoder_msc_down_up {
@@ -94,7 +99,7 @@
 &kp Q               &kp W         &kp E             &kp R            &kp T                                                             &kp Y        &kp U  &lt 5 I    &kp O    &kp P
 &mt LEFT_CONTROL A  &kp S         &kp D             &kp F            &kp G        &kp LG(LS(N5))                         &kp MINUS      &kp H        &kp J  &kp K      &kp L    &kp SQT
 &mt LEFT_SHIFT Z    &kp X         &kp C             &kp V            &kp B        &kp COLON                              &kp SEMICOLON  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp LEFT_SHIFT      &kp LEFT_ALT  &kp LEFT_COMMAND  &lt_to_layer_0 6 LANGUAGE_1   &lt 2 SPACE  &lt_to_layer_0 1 LANGUAGE_2      &kp BACKSPACE  &lt 3 ENTER                             &kp DEL
+&kp LEFT_SHIFT      &kp LEFT_ALT  &kp LEFT_COMMAND  &lt_to_layer_0 6 LANGUAGE_2   &lt 2 SPACE  &lt_to_layer_0 1 LANGUAGE_1      &kp BACKSPACE  &lt 3 ENTER                             &kp DEL
             >;
 
             sensor-bindings = <&encoder_msc_down_up>;
