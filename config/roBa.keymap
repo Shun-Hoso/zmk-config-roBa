@@ -27,6 +27,7 @@
         escape {
             bindings = <&kp ESCAPE>;
             key-positions = <18 19>;
+            require-prior-idle-ms = <150>;
         };
 
         tab {
@@ -42,6 +43,7 @@
         eisu {
             bindings = <&to_layer_0 LANGUAGE_2>;
             key-positions = <11 10>;
+            require-prior-idle-ms = <150>;
         };
 
         double_quotation {
