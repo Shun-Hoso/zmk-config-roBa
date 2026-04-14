@@ -59,6 +59,24 @@
             bindings = <&kp EQUAL>;
             key-positions = <24 25>;
         };
+
+        pair_paren_combo {
+            bindings = <&pair_paren>;
+            key-positions = <8 9>;
+            layers = <2>;
+        };
+
+        pair_bracket_combo {
+            bindings = <&pair_bracket>;
+            key-positions = <29 30>;
+            layers = <2>;
+        };
+
+        pair_brace_combo {
+            bindings = <&pair_brace>;
+            key-positions = <31 32>;
+            layers = <2>;
+        };
     };
 
     macros {
@@ -67,6 +85,27 @@
             #binding-cells = <1>;
             bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
             label = "TO_LAYER_0";
+        };
+
+        pair_paren: pair_paren {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_PARENTHESIS &kp RIGHT_PARENTHESIS &kp LEFT_ARROW>;
+            label = "PAIR_PAREN";
+        };
+
+        pair_bracket: pair_bracket {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_BRACKET &kp RIGHT_BRACKET &kp LEFT_ARROW>;
+            label = "PAIR_BRACKET";
+        };
+
+        pair_brace: pair_brace {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE &kp LEFT_ARROW>;
+            label = "PAIR_BRACE";
         };
     };
 
@@ -86,6 +125,15 @@
             label = "ENCODER_MSC_DOWN_UP";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
+            tap-ms = <20>;
+        };
+
+        encoder_zoom: encoder_zoom {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_ZOOM";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp LG(EQUAL)>, <&kp LG(MINUS)>;
 
             tap-ms = <20>;
         };
@@ -132,6 +180,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans          &trans         &trans    &trans         &trans          &trans          &kp F11
 &trans  &trans  &trans  &trans  &trans  &kp DELETE      &kp BACKSPACE  &trans                                                   &kp F12
             >;
+
+            sensor-bindings = <&encoder_zoom>;
         };
 
         MOUSE {
