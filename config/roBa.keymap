@@ -45,7 +45,7 @@
         };
 
         eisu {
-            bindings = <&to_layer_0 LANGUAGE_1>;
+            bindings = <&to_layer_0 LANGUAGE_2>;
             key-positions = <11 10>;
             require-prior-idle-ms = <150>;
         };
