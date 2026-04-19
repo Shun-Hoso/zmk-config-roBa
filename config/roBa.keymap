@@ -156,7 +156,7 @@
         NAV {
             bindings = <
 &kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &kp LG(GRAVE)                       &trans  &trans  &trans  &trans  &trans
-&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END          &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END          &trans      &trans  &kp LG(LBKT)  &trans  &trans  &kp LG(RBKT)  &trans
 &kp LEFT_SHIFT  &kp LG(LS(LEFT_ARROW))  &kp LC(DOWN_ARROW)  &kp LG(LS(RIGHT_ARROW))  &kp LC(UP_ARROW)     &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans          &trans                  &trans          &trans                   &trans           &trans      &kp DEL &trans                          &trans
             >;

@@ -180,6 +180,8 @@ A, Z, ', Space, Enter は長押しするとモディファイア/レイヤーが
 | 行頭/行末へ | NAV + A/G（HOME/END） |
 | ブラウザのタブ切替 | NAV + W/R（Ctrl+Shift+Tab / Ctrl+Tab） |
 | VSCode のタブ切替 | NAV + エンコーダ回転 |
+| **ブラウザの戻る** | **NAV + H（Cmd+[）** |
+| **ブラウザの進む** | **NAV + L（Cmd+]）** |
 | macOS ウィンドウ切替 | NAV + T（Cmd+`） |
 | macOS デスクトップ切替 | NAV + X/V（Cmd+Shift+←/→） |
 | Mission Control（全ウィンドウ表示） | NAV + B（Ctrl+↑） |
