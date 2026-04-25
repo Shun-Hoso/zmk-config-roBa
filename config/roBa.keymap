@@ -31,7 +31,8 @@
         escape {
             bindings = <&kp ESCAPE>;
             key-positions = <18 19>;
-            require-prior-idle-ms = <150>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <280>;
         };
 
         tab {
