@@ -170,7 +170,7 @@
         NAV {
             bindings = <
 &kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &kp LG(GRAVE)                       &trans  &trans  &trans  &trans  &trans
-&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END          &trans      &trans  &kp LG(LBKT)  &trans  &trans  &kp LG(RBKT)  &trans
+&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END          &trans      &trans  &kp LG(LBKT)  &kp PAGE_UP    &kp PAGE_DOWN  &kp LG(RBKT)  &trans
 &kp LEFT_SHIFT  &kp LC(LEFT_ARROW)      &kp LC(DOWN_ARROW)  &kp LC(RIGHT_ARROW)      &kp LC(UP_ARROW)     &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans          &trans                  &trans          &trans                   &trans           &trans      &kp DEL &trans                          &trans
             >;
@@ -202,7 +202,7 @@
             bindings = <
 &trans  &trans    &trans    &trans    &trans                      &trans  &trans    &trans    &trans    &trans
 &trans  &mkp MB2  &mkp MB3  &mkp MB1  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans    &trans    &trans    &mo 5   &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &tog 4    &tog 4  &trans      &trans  &trans                                &trans
             >;
         };
