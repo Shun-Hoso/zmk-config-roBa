@@ -100,7 +100,7 @@
 
         appshot {
             bindings = <&appshot_cmd>;
-            key-positions = <14 16>;
+            key-positions = <14 17>;
             require-prior-idle-ms = <280>;
         };
 
