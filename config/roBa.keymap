@@ -91,6 +91,12 @@
             timeout-ms = <50>;
             require-prior-idle-ms = <280>;
         };
+
+        voice_desktop {
+            bindings = <&kp CAPSLOCK>;
+            key-positions = <34 42>;
+            require-prior-idle-ms = <280>;
+        };
     };
 
     macros {
