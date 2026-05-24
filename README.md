@@ -406,6 +406,14 @@ Space 長押しは NUM レイヤーに割り当て済みのため、Claude Code 
 - 誤爆防止のため **280ms アイドルガード**付き（タイピング直後は発動しません）。
 - Quick Entry 用の音声です。メインチャットウィンドウのマイクボタンとは別経路です。
 
+#### Codex Appshot（⌘+⌘ 相当）
+
+roBa には **Right Command キーがない**ため、Codex の Hotkey「⌘ + ⌘」はそのままでは押せません。
+
+**Codex 側**: Settings → Appshots → Hotkey = **⌘ + ⌘**
+
+**roBa 側**: **G + H** 同時押し → 左右 Command を同時送信（280ms idle）
+
 ---
 
 ### 🔗 Bluetooth 接続管理（Layer 6）
@@ -435,6 +443,7 @@ Space 長押しは NUM レイヤーに割り当て済みのため、Claude Code 
 | **C + V** | `=` (イコール) | **C**ode の = |
 | **F + J** | Caps Word | 定数・SQL キーワードなど連続大文字（スペース等で解除） |
 | **Shift + Del** | Caps Lock | Claude Desktop Quick Entry 音声（280ms idle） |
+| **G + H** | ⌘ + ⌘（左右同時） | Codex Appshot（Hotkey = ⌘+⌘ 設定時、280ms idle） |
 | **V + B** | SCROLL レイヤー ON/OFF | トグル。どのレイヤーでも |
 | **( + )** | `()` + カーソル中央 | NUM レイヤー限定。ペアリング |
 | **[ + ]** | `[]` + カーソル中央 | NUM レイヤー限定。ペアリング |

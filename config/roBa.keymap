@@ -97,6 +97,13 @@
             key-positions = <34 42>;
             require-prior-idle-ms = <280>;
         };
+
+        appshot {
+            bindings = <&appshot_cmd>;
+            key-positions = <14 16>;
+            require-prior-idle-ms = <280>;
+        };
+
     };
 
     macros {
@@ -127,6 +134,20 @@
             bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE &kp LEFT_ARROW>;
             label = "PAIR_BRACE";
         };
+
+        appshot_cmd: appshot_cmd {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            label = "APPSHOT_CMD";
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_press &kp LEFT_GUI>
+                , <&macro_press &kp RIGHT_GUI>
+                , <&macro_wait_time 80>
+                , <&macro_release &kp RIGHT_GUI>
+                , <&macro_release &kp LEFT_GUI>;
+        };
+
     };
 
     behaviors {
