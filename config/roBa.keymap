@@ -82,6 +82,7 @@
         scroll_mode {
             bindings = <&tog 5>;
             key-positions = <25 26>;
+            layers = <0 4>;
             timeout-ms = <30>;
         };
 
