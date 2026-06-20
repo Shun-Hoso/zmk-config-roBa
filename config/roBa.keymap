@@ -106,7 +106,7 @@
         };
 
         code_jump {
-            bindings = <&code_jump_menu>;
+            bindings = <&code_jump_click>;
             key-positions = <13 14>;
             layers = <0 4 5>;
             timeout-ms = <100>;
@@ -157,17 +157,19 @@
                 , <&macro_release &kp LEFT_GUI>;
         };
 
-        code_jump_menu: code_jump_menu {
+        code_jump_click: code_jump_click {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            label = "CODE_JUMP_MENU";
+            label = "CODE_JUMP_CLICK";
             tap-ms = <40>;
             wait-ms = <30>;
-            bindings = <&macro_press &mkp MB2>
+            bindings = <&macro_press &kp LEFT_GUI>
                 , <&macro_wait_time 40>
-                , <&macro_release &mkp MB2>
-                , <&macro_wait_time 120>
-                , <&kp F12>;
+                , <&macro_press &mkp MB1>
+                , <&macro_wait_time 50>
+                , <&macro_release &mkp MB1>
+                , <&macro_wait_time 40>
+                , <&macro_release &kp LEFT_GUI>;
         };
 
     };
