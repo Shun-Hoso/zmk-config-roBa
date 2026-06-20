@@ -21,7 +21,7 @@
 };
 
 &mkp_input_listener {
-    input-processors = <&zip_temp_layer 4 250>;
+    input-processors = <&zip_temp_layer 4 600>;
 };
 
 / {
@@ -105,6 +105,14 @@
             require-prior-idle-ms = <280>;
         };
 
+        code_jump {
+            bindings = <&code_jump_menu>;
+            key-positions = <13 14>;
+            layers = <0 4 5>;
+            timeout-ms = <100>;
+            require-prior-idle-ms = <80>;
+        };
+
     };
 
     macros {
@@ -147,6 +155,19 @@
                 , <&macro_wait_time 80>
                 , <&macro_release &kp RIGHT_GUI>
                 , <&macro_release &kp LEFT_GUI>;
+        };
+
+        code_jump_menu: code_jump_menu {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            label = "CODE_JUMP_MENU";
+            tap-ms = <40>;
+            wait-ms = <30>;
+            bindings = <&macro_press &mkp MB2>
+                , <&macro_wait_time 40>
+                , <&macro_release &mkp MB2>
+                , <&macro_wait_time 120>
+                , <&kp F12>;
         };
 
     };
