@@ -254,7 +254,7 @@
         FUNC {
             bindings = <
 &kp LG(N1)  &kp LG(N2)  &kp LG(N3)  &kp LG(N4)  &kp LG(N5)                         &kp F1    &kp PAGE_UP    &kp UP_ARROW    &kp PAGE_DOWN  &kp LG(R)
-&kp LG(N6)  &kp LG(N7)  &kp LG(N8)  &kp LG(N9)  &kp LG(N0)  &trans  &kp F13        &kp HOME  &kp LEFT_ARROW &kp DOWN_ARROW  &kp RIGHT_ARROW &kp END
+&kp LG(N6)  &kp LG(N7)  &kp LG(N8)  &kp LG(F)  &kp LG(LS(F))  &kp LG(LS(N5))  &kp F13        &kp HOME  &kp LEFT_ARROW &kp DOWN_ARROW  &kp RIGHT_ARROW &kp END
 &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_BRI_DN  &kp C_BRI_UP  &trans  &trans         &trans    &trans         &trans          &trans          &kp F11
 &trans      &trans      &trans      &trans      &trans      &kp DELETE      &kp BACKSPACE  &trans                                           &kp LG(LA(I))
             >;
