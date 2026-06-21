@@ -86,6 +86,20 @@
             timeout-ms = <30>;
         };
 
+        nav_select_word_left {
+            bindings = <&kp LA(LS(LEFT_ARROW))>;
+            key-positions = <22 23>;
+            layers = <1>;
+            timeout-ms = <80>;
+        };
+
+        nav_select_word_right {
+            bindings = <&kp LA(LS(RIGHT_ARROW))>;
+            key-positions = <22 25>;
+            layers = <1>;
+            timeout-ms = <80>;
+        };
+
         caps_word {
             bindings = <&caps_word>;
             key-positions = <13 18>;
