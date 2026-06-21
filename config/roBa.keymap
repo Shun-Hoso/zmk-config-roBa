@@ -247,7 +247,7 @@
 
         NAV {
             bindings = <
-&kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &kp LG(GRAVE)                       &trans  &trans  &trans  &trans  &trans
+&kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &trans                             &trans  &trans  &trans  &trans  &trans
 &kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END          &trans      &trans  &kp LC(MINUS)  &kp PAGE_UP    &kp PAGE_DOWN  &kp LC(LS(MINUS))  &trans
 &kp LEFT_SHIFT  &kp LC(LEFT_ARROW)      &kp LC(DOWN_ARROW)  &kp LC(RIGHT_ARROW)      &kp LC(UP_ARROW)     &trans      &trans  &trans  &trans  &kp LG(LEFT_BRACKET)  &kp LG(RIGHT_BRACKET)  &trans
 &trans          &trans                  &trans          &trans                   &trans           &trans      &kp DEL &trans                          &trans
