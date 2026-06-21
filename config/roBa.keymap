@@ -82,7 +82,7 @@
         scroll_mode {
             bindings = <&tog 5>;
             key-positions = <25 26>;
-            layers = <0 4>;
+            layers = <0 4 5>;
             timeout-ms = <30>;
         };
 
@@ -280,7 +280,7 @@
             bindings = <
 &trans  &trans    &trans    &trans    &trans                      &trans  &trans    &trans    &trans    &trans
 &trans  &mkp MB2  &mkp MB3  &mkp MB1  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans    &trans    &trans    &tog 5  &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &tog 4    &tog 4  &trans      &trans  &trans                                &trans
             >;
         };
