@@ -68,14 +68,14 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - SHIFT
+  - Ctl+←
+  - {t: ▽, type: trans}
+  - Ctl+→
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - Cmd+Sft+←
-  - {t: ▽, type: trans}
   - Cmd+Sft+→
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Opt+Sft+←
-  - Opt+Sft+→
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
