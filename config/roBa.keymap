@@ -303,7 +303,7 @@
             bindings = <
 &kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &trans                             &trans  &trans  &trans  &trans  &trans
 &kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END          &trans      &trans  &kp LC(MINUS)  &kp PAGE_UP    &kp PAGE_DOWN  &kp LC(LS(MINUS))  &trans
-&kp LEFT_SHIFT  &kp LC(LEFT_ARROW)      &kp LC(DOWN_ARROW)  &kp LC(RIGHT_ARROW)      &kp LC(UP_ARROW)     &trans      &trans  &trans  &trans  &kp LG(LEFT_BRACKET)  &kp LG(RIGHT_BRACKET)  &trans
+&kp LEFT_SHIFT  &kp LC(LEFT_ARROW)      &kp LC(DOWN_ARROW)  &kp LC(RIGHT_ARROW)      &kp LC(UP_ARROW)     &trans      &trans  &kp LA(LS(LEFT_ARROW))  &kp LA(LS(RIGHT_ARROW))  &kp LG(LEFT_BRACKET)  &kp LG(RIGHT_BRACKET)  &trans
 &trans          &trans                  &trans          &trans                   &trans           &trans      &kp DEL &trans                          &trans
             >;
 
@@ -359,7 +359,7 @@
 
         DATE_NUM {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                                  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp MINUS  &kp SLASH
+&kp EQUAL  &kp SLASH  &kp ASTERISK  &kp MINUS  &kp PLUS                  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp MINUS  &kp SLASH
 &trans  &trans  &trans  &trans  &trans  &trans      &trans             &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp COLON  &kp ENTER
 &trans  &trans  &trans  &trans  &trans  &trans      &trans             &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp DOT
 &trans  &trans  &trans  &tog 7  &tog 7  &trans      &kp BACKSPACE      &kp ENTER                                &kp DEL
