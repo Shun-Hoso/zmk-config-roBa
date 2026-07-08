@@ -29,7 +29,7 @@ layers:
   - V
   - B
   - ':'
-  - ;
+  - {t: ;, h: CMD}
   - N
   - M
   - ','
@@ -307,6 +307,50 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - BT CLR ALL
+  DATE_NUM:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '7'
+  - '8'
+  - '9'
+  - '-'
+  - /
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '4'
+  - '5'
+  - '6'
+  - ':'
+  - ENTER
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '0'
+  - '1'
+  - '2'
+  - '3'
+  - .
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - DATE OFF
+  - DATE OFF
+  - {t: ▽, type: trans}
+  - BACKSPACE
+  - ENTER
+  - DEL
 combos:
 - p: [18, 19]
   k: ESC
@@ -320,3 +364,5 @@ combos:
   k: '"'
 - p: [24, 25]
   k: '='
+- p: [38, 41]
+  k: DATE NUM
