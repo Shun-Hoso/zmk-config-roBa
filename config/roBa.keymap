@@ -350,7 +350,7 @@
 &trans  &trans    &trans    &trans    &trans                      &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans    &trans    &tog 4    &tog 4  &trans      &trans  &trans                                &trans
+&trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans                                &trans
             >;
         };
 
