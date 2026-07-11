@@ -188,10 +188,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - Right Click
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Left Click
+  - Shift Click
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -275,10 +275,10 @@ layers:
   - P3 BLE
   - P4 BLE
   - {t: ▽, type: trans}
-  - Right Click
   - {t: ▽, type: trans}
-  - Left Click
-  - Shift Click
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - OUT BLE

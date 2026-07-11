@@ -17,12 +17,20 @@
 };
 
 &trackball {
-    automouse-layer = <4>;
     scroll-layers = <5>;
 };
 
+&zip_temp_layer {
+    require-prior-idle-ms = <200>;
+    excluded-positions = <11 13 14>; // S / F / G
+};
+
+&trackball_listener {
+    input-processors = <&zip_temp_layer 4 5000>;
+};
+
 &mkp_input_listener {
-    input-processors = <&zip_temp_layer 4 600>;
+    input-processors = <&zip_temp_layer 4 250>;
 };
 
 / {
@@ -348,7 +356,7 @@
         MOUSE {
             bindings = <
 &trans  &trans    &trans    &trans    &trans                      &trans  &trans    &trans    &trans    &trans
-&trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &mkp MB2  &trans    &mkp MB1  &shift_click  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans                                &trans
             >;
@@ -366,7 +374,7 @@
         layer_6 {
             bindings = <
 &trans  &trans        &trans        &trans        &trans                           &profile_0_ble  &profile_1_ble  &profile_2_ble  &profile_3_ble  &profile_4_ble
-&trans  &mkp MB2      &trans        &mkp MB1      &shift_click  &trans      &trans       &out OUT_BLE   &out OUT_USB   &out OUT_TOG   &trans        &trans
+&trans  &trans        &trans        &trans        &trans  &trans      &trans       &out OUT_BLE   &out OUT_USB   &out OUT_TOG   &trans        &trans
 &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR
 &trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                                  &bt BT_CLR_ALL
             >;
