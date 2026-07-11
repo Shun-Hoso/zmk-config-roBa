@@ -229,6 +229,21 @@
                 , <&macro_release &kp LEFT_GUI>;
         };
 
+        shift_click: shift_click {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            label = "SHIFT_CLICK";
+            tap-ms = <40>;
+            wait-ms = <30>;
+            bindings = <&macro_press &kp LEFT_SHIFT>
+                , <&macro_wait_time 40>
+                , <&macro_press &mkp MB1>
+                , <&macro_wait_time 50>
+                , <&macro_release &mkp MB1>
+                , <&macro_wait_time 40>
+                , <&macro_release &kp LEFT_SHIFT>;
+        };
+
     };
 
     behaviors {
@@ -323,7 +338,7 @@
             bindings = <
 &kp LG(N1)  &kp LG(N2)  &kp LG(N3)  &kp LG(N4)  &kp LG(N5)                         &kp F1    &kp PAGE_UP    &kp UP_ARROW    &kp PAGE_DOWN  &kp LG(R)
 &kp LG(N6)  &kp LG(N7)  &kp LG(N8)  &kp LG(F)  &kp LG(LS(F))  &kp LG(LS(N5))  &kp F13        &kp HOME  &kp LEFT_ARROW &kp DOWN_ARROW  &kp RIGHT_ARROW &kp END
-&kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_BRI_DN  &kp C_BRI_UP  &trans  &trans         &trans    &trans         &trans          &trans          &kp F11
+&kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_BRI_DN  &kp C_BRI_UP  &trans  &trans         &kp LG(LS(G))  &kp LG(G)  &trans          &trans          &kp F11
 &trans      &trans      &trans      &trans      &trans      &kp DELETE      &kp BACKSPACE  &trans                                           &kp LG(LA(I))
             >;
 
@@ -333,7 +348,7 @@
         MOUSE {
             bindings = <
 &trans  &trans    &trans    &trans    &trans                      &trans  &trans    &trans    &trans    &trans
-&trans  &mkp MB2  &mkp MB3  &mkp MB1  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
+&trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &trans    &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans    &trans    &tog 4    &tog 4  &trans      &trans  &trans                                &trans
             >;
@@ -351,7 +366,7 @@
         layer_6 {
             bindings = <
 &trans  &trans        &trans        &trans        &trans                           &profile_0_ble  &profile_1_ble  &profile_2_ble  &profile_3_ble  &profile_4_ble
-&trans  &trans        &trans        &trans        &trans  &trans      &trans       &out OUT_BLE   &out OUT_USB   &out OUT_TOG   &trans        &trans
+&trans  &mkp MB2      &trans        &mkp MB1      &shift_click  &trans      &trans       &out OUT_BLE   &out OUT_USB   &out OUT_TOG   &trans        &trans
 &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR
 &trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                                  &bt BT_CLR_ALL
             >;
