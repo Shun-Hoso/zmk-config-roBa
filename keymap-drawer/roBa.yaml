@@ -84,7 +84,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {type: held}
+  - {t: ▽, type: trans}
   - DEL
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -263,6 +263,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   BT:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -307,50 +308,6 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - BT CLR ALL
-  DATE_NUM:
-  - '='
-  - /
-  - '*'
-  - '-'
-  - +
-  - '7'
-  - '8'
-  - '9'
-  - '-'
-  - /
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '4'
-  - '5'
-  - '6'
-  - ':'
-  - ENTER
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '0'
-  - '1'
-  - '2'
-  - '3'
-  - .
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - DATE OFF
-  - DATE OFF
-  - {t: ▽, type: trans}
-  - BACKSPACE
-  - ENTER
-  - DEL
 combos:
 - p: [18, 19]
   k: ESC
@@ -364,5 +321,12 @@ combos:
   k: '"'
 - p: [24, 25]
   k: '='
-- p: [38, 41]
-  k: DATE NUM
+- p: [29, 31]
+  k: '<'
+  l: [NUM]
+- p: [30, 32]
+  k: '>'
+  l: [NUM]
+- p: [32, 33]
+  k: '?'
+  l: [NUM]

@@ -88,6 +88,24 @@
             layers = <2>;
         };
 
+        less_than_combo {
+            bindings = <&kp LESS_THAN>;
+            key-positions = <29 31>;
+            layers = <2>;
+        };
+
+        greater_than_combo {
+            bindings = <&kp GREATER_THAN>;
+            key-positions = <30 32>;
+            layers = <2>;
+        };
+
+        question_mark_combo {
+            bindings = <&kp QMARK>;
+            key-positions = <32 33>;
+            layers = <2>;
+        };
+
         scroll_mode {
             bindings = <&tog 5>;
             key-positions = <25 26>;
@@ -134,13 +152,6 @@
             layers = <0 4 5>;
             timeout-ms = <100>;
             require-prior-idle-ms = <80>;
-        };
-
-        date_num_toggle {
-            bindings = <&tog 7>;
-            key-positions = <38 41>;
-            layers = <0 2 3 7>;
-            timeout-ms = <80>;
         };
 
     };
@@ -380,13 +391,5 @@
             >;
         };
 
-        DATE_NUM {
-            bindings = <
-&kp EQUAL  &kp SLASH  &kp ASTERISK  &kp MINUS  &kp PLUS                  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp MINUS  &kp SLASH
-&trans  &trans  &trans  &trans  &trans  &trans      &trans             &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp COLON  &kp ENTER
-&trans  &trans  &trans  &trans  &trans  &trans      &trans             &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp DOT
-&trans  &trans  &trans  &tog 7  &tog 7  &trans      &kp BACKSPACE      &kp ENTER                                &kp DEL
-            >;
-        };
     };
 };
