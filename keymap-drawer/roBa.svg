@@ -768,22 +768,6 @@ path.combo {
 <rect rx="6" ry="6" x="154" y="131" width="28" height="26" class="combo"/>
 <text x="168" y="144" class="combo tap">=</text>
 </g>
-<g class="combo combopos-6">
-<path d="M560,148 l-38,5" class="combo"/>
-<path d="M560,148 l38,-5" class="combo"/>
-<rect rx="6" ry="6" x="546" y="135" width="28" height="26" class="combo"/>
-<text x="560" y="148" class="combo tap">&lt;</text>
-</g>
-<g class="combo combopos-7">
-<path d="M617,151 l-38,-2" class="combo"/>
-<path d="M617,151 l38,2" class="combo"/>
-<rect rx="6" ry="6" x="603" y="138" width="28" height="26" class="combo"/>
-<text x="617" y="151" class="combo tap">&gt;</text>
-</g>
-<g class="combo combopos-8">
-<rect rx="6" ry="6" x="687" y="152" width="28" height="26" class="combo"/>
-<text x="701" y="165" class="combo tap">?</text>
-</g>
 </g>
 </g>
 <g transform="translate(30, 1017)" class="layer-FUNC">

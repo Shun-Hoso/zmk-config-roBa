@@ -88,24 +88,6 @@
             layers = <2>;
         };
 
-        less_than_combo {
-            bindings = <&kp LESS_THAN>;
-            key-positions = <29 31>;
-            layers = <2>;
-        };
-
-        greater_than_combo {
-            bindings = <&kp GREATER_THAN>;
-            key-positions = <30 32>;
-            layers = <2>;
-        };
-
-        question_mark_combo {
-            bindings = <&kp QMARK>;
-            key-positions = <32 33>;
-            layers = <2>;
-        };
-
         scroll_mode {
             bindings = <&tog 5>;
             key-positions = <25 26>;
