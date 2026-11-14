@@ -26,12 +26,32 @@ jobs:
           mkdir -p /tmp/roba-diagnostic-west/config
           cp -R config/. /tmp/roba-diagnostic-west/config/
           cp diagnostics/west.yml /tmp/roba-diagnostic-west/config/west.yml
+      - name: Restore dependency cache
+        id: dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            /tmp/roba-diagnostic-west/modules
+            /tmp/roba-diagnostic-west/zephyr
+            /tmp/roba-diagnostic-west/tools
+            /tmp/roba-diagnostic-west/bootloader
+          key: roba-diagnostics-dependencies-${{ hashFiles('diagnostics/west.yml') }}
       - name: Fetch pinned firmware sources
         working-directory: /tmp/roba-diagnostic-west
         run: |
           west init -l config
           west update --fetch-opt=--filter=tree:0
           west zephyr-export
+      - name: Save dependency cache
+        if: steps.dependencies.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            /tmp/roba-diagnostic-west/modules
+            /tmp/roba-diagnostic-west/zephyr
+            /tmp/roba-diagnostic-west/tools
+            /tmp/roba-diagnostic-west/bootloader
+          key: ${{ steps.dependencies.outputs.cache-primary-key }}
       - name: Build restore firmware
         working-directory: /tmp/roba-diagnostic-west
         run: |

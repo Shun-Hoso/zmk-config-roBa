@@ -1,7 +1,14 @@
 import importlib.util
+import contextlib
+import io
+import os
+import pty
 from pathlib import Path
 import tempfile
+import threading
+import time
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,14 +51,44 @@ class CollectorPrivacyTests(unittest.TestCase):
 
     def test_selects_only_serial_port_under_right_roba(self):
         def device(name, vendor, port):
-            return {'USB Product Name': name, 'idVendor': vendor, 'idProduct': 0x615E,
-                    'IORegistryEntryChildren': [{'IORegistryEntryChildren': [
+            return {'IOObjectClass': 'IOUSBHostDevice', 'USB Product Name': name,
+                    'idVendor': vendor, 'idProduct': 0x615E,
+                    'IORegistryEntryChildren': [{'IOObjectClass': 'IOUSBHostInterface',
+                        'idVendor': vendor, 'idProduct': 0x615E, 'IORegistryEntryChildren': [
                         {'IOCalloutDevice': port}]}]}
         tree = [device('roBa_L', 0x1D50, '/dev/cu.usbmodemLEFT'),
                 device('roBa', 0x1D50, '/dev/cu.usbmodemRIGHT'),
                 device('roBa', 0x1234, '/dev/cu.usbmodemOTHER'),
                 device('Other', 0x1D50, '/dev/cu.usbmodemMODEM')]
         self.assertEqual(collector.roba_ports(tree), ['/dev/cu.usbmodemRIGHT'])
+
+    def test_serial_capture_discards_unrelated_text(self):
+        master, slave = pty.openpty()
+
+        def write_records():
+            time.sleep(0.2)
+            for _ in range(3):
+                os.write(master, b'keycode=42 private-text=DO_NOT_SAVE\n' + self.line + b'\r\n')
+                time.sleep(0.1)
+
+        writer = threading.Thread(target=write_records)
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                output = Path(directory) / 'capture.txt'
+                writer.start()
+                with patch.object(collector.fcntl, 'ioctl', return_value=0), \
+                        contextlib.redirect_stdout(io.StringIO()):
+                    count = collector.collect(os.ttyname(slave), output, 1)
+                writer.join()
+                saved = output.read_text()
+                self.assertEqual(count, 3)
+                self.assertEqual(saved.count(collector.PREFIX), 3)
+                self.assertNotIn('DO_NOT_SAVE', saved)
+                self.assertNotIn('keycode=42', saved)
+        finally:
+            writer.join(timeout=2)
+            os.close(master)
+            os.close(slave)
 
 
 class InstrumentationTests(unittest.TestCase):

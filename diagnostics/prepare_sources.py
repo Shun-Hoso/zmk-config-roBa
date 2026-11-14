@@ -65,15 +65,16 @@ def instrument_listener(source):
 def prepare(workspace):
     files = [
         (workspace / 'zmk-pmw3610-driver/src/pmw3610.c', instrument_driver,
-         '4272e4cf2b8ec2f483f9bde279e3a0e4f41fb69c4fe0f3f1b4b6a5901cb3456a'),
+         'e5b86ebdf865082d7254195a94158e5667d8c6da'),
         (workspace / 'zmk/app/src/pointing/input_listener.c', instrument_listener,
-         'ef24e763c3f84ea46dafd7a9a3333a91a924978e1edfe8312de7c8c158962b10'),
+         '28f2530003257074ee32e72603a470ca4cfaed05'),
     ]
     # 片方だけが書き換わらないよう、全箇所を確認してから保存する。
     prepared = []
     for path, instrument, expected in files:
         original = path.read_bytes()
-        if hashlib.sha256(original).hexdigest() != expected:
+        blob = b'blob ' + str(len(original)).encode('ascii') + b'\0' + original
+        if hashlib.sha1(blob).hexdigest() != expected:
             raise ValueError(f"Unrecognized source revision: {path.name}")
         prepared.append((path, instrument(original.decode('utf-8'))))
     for path, source in prepared:

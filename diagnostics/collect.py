@@ -63,7 +63,7 @@ def roba_ports(tree):
         if not isinstance(node, dict):
             return
         product = node.get('USB Product Name')
-        if 'idVendor' in node and 'idProduct' in node:
+        if node.get('IOObjectClass') == 'IOUSBHostDevice':
             under_roba = (product == 'roBa' and node.get('idVendor') == 0x1D50
                           and node.get('idProduct') == 0x615E)
         port = node.get('IOCalloutDevice', '')
@@ -78,7 +78,7 @@ def roba_ports(tree):
 
 
 def find_port():
-    result = subprocess.run(['ioreg', '-a', '-r', '-c', 'IOUSBHostDevice'],
+    result = subprocess.run(['ioreg', '-a', '-l', '-r', '-c', 'IOUSBHostDevice'],
                             capture_output=True, check=True)
     ports = [port for port in roba_ports(plistlib.loads(result.stdout)) if os.path.exists(port)]
     if len(ports) != 1:
