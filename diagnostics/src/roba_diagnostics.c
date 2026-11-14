@@ -253,21 +253,21 @@ static void diagnostic_thread(void *a, void *b, void *c) {
         }
 
         char line[1024];
+#define FORMAT_FIELD(name) " " #name "=%u"
+#define VALUE_FIELD(name) , snapshot.name
         int length = snprintf(line, sizeof(line),
             "ROBA_DIAG_V1 seq=%u ms=%u span=%u usb=%u irq_on=%u irq_pin=%d scroll=%u"
             " queue_age_ms=%u work_age_ms=%u read_age_ms=%u post_age_ms=%u"
             " process_age_ms=%u send_age_ms=%u output_drop=%u"
-#define FORMAT_FIELD(name) " " #name "=%u"
             DIAG_FIELDS(FORMAT_FIELD)
-#undef FORMAT_FIELD
             "\r\n", sequence, now, span,
             zmk_endpoints_selected().transport == ZMK_TRANSPORT_USB,
             enabled, gpio_pin_get_dt(&motion_pin), scrolling,
             queue_age, work_age, read_age, post_age, process_age, send_age, output_dropped
-#define VALUE_FIELD(name) , snapshot.name
             DIAG_FIELDS(VALUE_FIELD)
-#undef VALUE_FIELD
         );
+#undef FORMAT_FIELD
+#undef VALUE_FIELD
         if (length < 0 || (size_t)length >= sizeof(line) || !send_snapshot(line, length)) {
             output_dropped++;
         }
