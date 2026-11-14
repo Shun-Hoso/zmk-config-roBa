@@ -80,7 +80,7 @@ jobs:
           cp /tmp/roba-diagnostic-west/build-restore/zephyr/zmk.uf2 artifacts/restore/roBa_R-restore.uf2
           cp diagnostics/collect.py diagnostics/README.md artifacts/diagnostic/
           cp diagnostics/RESTORE.md artifacts/restore/README.md
-          git rev-parse HEAD > artifacts/diagnostic/source-commit.txt
+          printf '%s\n' "$GITHUB_SHA" > artifacts/diagnostic/source-commit.txt
           cp artifacts/diagnostic/source-commit.txt artifacts/restore/
       - uses: actions/upload-artifact@v4
         with:
