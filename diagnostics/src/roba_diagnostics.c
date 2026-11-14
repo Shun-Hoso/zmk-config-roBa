@@ -223,12 +223,12 @@ static void diagnostic_thread(void *a, void *b, void *c) {
     uint32_t sequence = 0, last_snapshot = k_uptime_get_32(), output_dropped = 0;
     while (true) {
         k_sleep(K_SECONDS(1));
-        uint32_t now = k_uptime_get_32();
         struct diagnostic_counts snapshot;
         uint32_t queue_age, work_age, read_age, post_age, process_age, send_age;
         bool enabled, scrolling;
 
         k_spinlock_key_t key = k_spin_lock(&counts_lock);
+        uint32_t now = k_uptime_get_32();
         snapshot = counts;
         queue_age = age(&queued, now);
         work_age = age(&working, now);
