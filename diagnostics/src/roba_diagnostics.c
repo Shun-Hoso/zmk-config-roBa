@@ -11,7 +11,7 @@
     X(irq) X(work) X(done) X(irq_err) X(submit_err) X(reads) X(moving) X(zero) X(read_err)            \
     X(quality_min) X(quality_max) X(queue_max_ms) X(read_max_ms) X(post) X(post_err)                  \
     X(post_max_ms) X(events) X(frames) X(filtered) X(process_max_ms) X(send) X(send_err)             \
-    X(send_max_ms)
+    X(send_max_ms) X(sensor_abs) X(post_abs) X(report_abs) X(report_zero) X(other_mode_reads)
 
 struct diagnostic_counts {
 #define DECLARE_FIELD(name) uint32_t name;
@@ -96,7 +96,13 @@ void roba_diag_read_begin(void) {
     k_spin_unlock(&counts_lock, key);
 }
 
-void roba_diag_motion(int result, bool moving, uint8_t quality, bool scrolling) {
+/* 符号と軸を残さず集計する。往復しても相殺しない。 */
+static uint32_t magnitude(int32_t value) {
+    return value < 0 ? 0u - (uint32_t)value : (uint32_t)value;
+}
+
+void roba_diag_motion(int result, int16_t x, int16_t y, uint8_t quality,
+                      bool scrolling, bool pointing) {
     k_spinlock_key_t key = k_spin_lock(&counts_lock);
     counts.reads++;
     finish(&reading, &counts.read_max_ms);
@@ -109,7 +115,13 @@ void roba_diag_motion(int result, bool moving, uint8_t quality, bool scrolling) 
         }
         counts.quality_min = MIN(counts.quality_min, quality);
         counts.quality_max = MAX(counts.quality_max, quality);
-        if (moving) {
+        uint32_t amount = magnitude(x) + magnitude(y);
+        if (pointing) {
+            counts.sensor_abs += amount;
+        } else {
+            counts.other_mode_reads++;
+        }
+        if (amount != 0) {
             counts.moving++;
         } else {
             counts.zero++;
@@ -129,6 +141,9 @@ int roba_diag_report_rel(const struct device *dev, uint16_t code, int32_t value,
     key = k_spin_lock(&counts_lock);
     counts.post++;
     counts.post_err += result < 0;
+    if (result == 0 && (code == INPUT_REL_X || code == INPUT_REL_Y)) {
+        counts.post_abs += magnitude(value);
+    }
     finish(&posting, &counts.post_max_ms);
     k_spin_unlock(&counts_lock, key);
     return result;
@@ -155,11 +170,16 @@ void roba_diag_process_end(const struct device *dev, bool filtered) {
     k_spin_unlock(&counts_lock, key);
 }
 
-void roba_diag_send_begin(const struct device *dev) {
+void roba_diag_send_begin(const struct device *dev, int16_t x, int16_t y, bool pointing) {
     if (dev != trackball) {
         return;
     }
     k_spinlock_key_t key = k_spin_lock(&counts_lock);
+    if (pointing) {
+        uint32_t amount = magnitude(x) + magnitude(y);
+        counts.report_abs += amount;
+        counts.report_zero += amount == 0;
+    }
     begin(&sending);
     k_spin_unlock(&counts_lock, key);
 }
@@ -256,7 +276,7 @@ static void diagnostic_thread(void *a, void *b, void *c) {
 #define FORMAT_FIELD(name) " " #name "=%u"
 #define VALUE_FIELD(name) , snapshot.name
         int length = snprintf(line, sizeof(line),
-            "ROBA_DIAG_V1 seq=%u ms=%u span=%u usb=%u irq_on=%u irq_pin=%d scroll=%u"
+            "ROBA_DIAG_V2 seq=%u ms=%u span=%u usb=%u irq_on=%u irq_pin=%d scroll=%u"
             " queue_age_ms=%u work_age_ms=%u read_age_ms=%u post_age_ms=%u"
             " process_age_ms=%u send_age_ms=%u output_drop=%u"
             DIAG_FIELDS(FORMAT_FIELD)

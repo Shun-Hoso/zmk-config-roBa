@@ -35,6 +35,9 @@ class CollectorPrivacyTests(unittest.TestCase):
     def test_accepts_only_complete_numeric_schema(self):
         self.assertEqual(collector.parse_record(self.line + b'\r\n'), self.record)
 
+    def test_rejects_previous_firmware_schema(self):
+        self.assertIsNone(collector.parse_record(self.line.replace(b'ROBA_DIAG_V2', b'ROBA_DIAG_V1')))
+
     def test_rejects_keyboard_logs_and_unknown_fields(self):
         for data in (b'keycode=42 text=secret', self.line + b' keycode=42',
                      self.line.replace(b' ms=1000', b' text=1000')):

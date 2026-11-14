@@ -84,7 +84,7 @@ jobs:
           cp artifacts/diagnostic/source-commit.txt artifacts/restore/
       - uses: actions/upload-artifact@v4
         with:
-          name: roba-diagnostic
+          name: roba-diagnostic-v2
           path: artifacts/diagnostic
       - uses: actions/upload-artifact@v4
         with:

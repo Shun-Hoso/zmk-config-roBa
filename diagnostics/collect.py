@@ -16,12 +16,13 @@ import termios
 import time
 import tty
 
-PREFIX = 'ROBA_DIAG_V1'
+PREFIX = 'ROBA_DIAG_V2'
 FIELDS = (
     'seq ms span usb irq_on irq_pin scroll queue_age_ms work_age_ms read_age_ms '
     'post_age_ms process_age_ms send_age_ms output_drop irq work done irq_err submit_err '
     'reads moving zero read_err quality_min quality_max queue_max_ms read_max_ms post '
-    'post_err post_max_ms events frames filtered process_max_ms send send_err send_max_ms'
+    'post_err post_max_ms events frames filtered process_max_ms send send_err send_max_ms '
+    'sensor_abs post_abs report_abs report_zero other_mode_reads'
 ).split()
 
 
@@ -117,7 +118,7 @@ def collect(port, output, seconds):
         pending = b''
         previous_phase = None
         with output.open('x', encoding='utf-8') as log:
-            log.write('# roBa diagnostic counters v1; no keycodes or coordinates\n')
+            log.write('# roBa diagnostic counters v2; no keycodes, directions or coordinates\n')
             print('診断データを待っています。通常版の出力は保存しません。', flush=True)
             while True:
                 now = time.monotonic()
@@ -146,12 +147,15 @@ def collect(port, output, seconds):
                 pending += chunk
                 while b'\n' in pending:
                     line, pending = pending.split(b'\n', 1)
+                    if line.startswith(b'ROBA_DIAG_V1 '):
+                        raise RuntimeError('前回の診断版が動いています。今回のZIPの'
+                                           'roBa_R-diagnostic.uf2を右側へ書き込んでください。')
                     record = parse_record(line)
                     if record is None:
                         continue
                     if started_at is None:
                         started_at = time.monotonic()
-                        print(f'受信を確認しました。約{seconds}秒で自動終了します。', flush=True)
+                        print(f'移動量付き診断版（V2）の受信を確認しました。約{seconds}秒で自動終了します。', flush=True)
                     elapsed_ms = int((time.monotonic() - started_at) * 1000)
                     log.write(f'# received_ms={elapsed_ms}\n{format_record(record)}\n')
                     log.flush()

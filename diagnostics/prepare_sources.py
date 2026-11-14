@@ -25,12 +25,15 @@ def instrument_driver(source):
         '    roba_diag_read_begin();\n'
         '    int err = motion_burst_read(dev, buf, sizeof(buf));\n'
         '    if (err) {\n'
-        '        roba_diag_motion(err, false, 0, input_mode == SCROLL);\n'
+        '        roba_diag_motion(err, 0, 0, 0, input_mode == SCROLL, false);\n'
         '        return err;\n    }')
     source = replace_exact(source,
-        '    if (IS_ENABLED(CONFIG_PMW3610_ORIENTATION_0)) {',
-        '    roba_diag_motion(0, raw_x != 0 || raw_y != 0, buf[4], input_mode == SCROLL);\n\n'
-        '    if (IS_ENABLED(CONFIG_PMW3610_ORIENTATION_0)) {')
+        '    int16_t raw_x =',
+        '    roba_diag_motion(0,\n'
+        '        TOINT16((buf[PMW3610_X_L_POS] + ((buf[PMW3610_XY_H_POS] & 0xF0) << 4)), 12),\n'
+        '        TOINT16((buf[PMW3610_Y_L_POS] + ((buf[PMW3610_XY_H_POS] & 0x0F) << 8)), 12),\n'
+        '        buf[4], input_mode == SCROLL, input_mode == MOVE || input_mode == SNIPE);\n\n'
+        '    int16_t raw_x =')
     source = replace_exact(source, 'input_report_rel(', 'roba_diag_report_rel(', count=4)
     source = replace_exact(source,
         '    set_interrupt(dev, false);\n\n    // submit the real handler work\n'
@@ -56,7 +59,10 @@ def instrument_listener(source):
         '    int ret = filter_with_input_config(config, data, evt);\n'
         '    roba_diag_process_end(evt->dev, ret != ZMK_INPUT_PROC_CONTINUE);')
     source = replace_exact(source, '        zmk_endpoints_send_mouse_report();',
-        '        roba_diag_send_begin(evt->dev);\n'
+        '        roba_diag_send_begin(evt->dev,\n'
+        '            zmk_hid_get_mouse_report()->body.d_x,\n'
+        '            zmk_hid_get_mouse_report()->body.d_y,\n'
+        '            data->mouse.data.mode == INPUT_LISTENER_XY_DATA_MODE_REL);\n'
         '        int send_result = zmk_endpoints_send_mouse_report();\n'
         '        roba_diag_send_end(evt->dev, send_result);')
     return source
