@@ -1,4 +1,6 @@
 name: roBa
 build:
+  cmake: diagnostics
+  kconfig: diagnostics/Kconfig
   settings:
     board_root: .

@@ -1,0 +1,5 @@
+&zephyr_udc0 {
+    roba_diag_uart: roba_diag_uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};

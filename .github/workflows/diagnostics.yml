@@ -1,0 +1,72 @@
+name: Trackball diagnostics
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - diagnostics/**
+      - zephyr/module.yml
+      - .github/workflows/diagnostics.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: zmkfirmware/zmk-build-arm:stable
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test collector and instrumentation
+        run: python3 -m unittest discover -s diagnostics/tests -v
+      - name: Prepare isolated west workspace
+        run: |
+          mkdir -p /tmp/roba-diagnostic-west/config
+          cp -R config/. /tmp/roba-diagnostic-west/config/
+          cp diagnostics/west.yml /tmp/roba-diagnostic-west/config/west.yml
+      - name: Fetch pinned firmware sources
+        working-directory: /tmp/roba-diagnostic-west
+        run: |
+          west init -l config
+          west update --fetch-opt=--filter=tree:0
+          west zephyr-export
+      - name: Build restore firmware
+        working-directory: /tmp/roba-diagnostic-west
+        run: |
+          west build -s zmk/app -d build-restore -b seeeduino_xiao_ble -S studio-rpc-usb-uart -- \
+            -DSHIELD=roBa_R -DZMK_CONFIG=/tmp/roba-diagnostic-west/config \
+            -DZMK_EXTRA_MODULES="$GITHUB_WORKSPACE"
+      - name: Add diagnostic counters to isolated sources
+        run: python3 diagnostics/prepare_sources.py /tmp/roba-diagnostic-west
+      - name: Build diagnostic firmware
+        working-directory: /tmp/roba-diagnostic-west
+        run: |
+          west build -s zmk/app -d build-diagnostic -b seeeduino_xiao_ble -- \
+            -DSHIELD=roBa_R -DZMK_CONFIG=/tmp/roba-diagnostic-west/config \
+            -DZMK_EXTRA_MODULES="$GITHUB_WORKSPACE" \
+            -DEXTRA_CONF_FILE="$GITHUB_WORKSPACE/diagnostics/diagnostic.conf" \
+            -DEXTRA_DTC_OVERLAY_FILE="$GITHUB_WORKSPACE/diagnostics/diagnostic.overlay"
+      - name: Verify diagnostic build
+        run: |
+          python3 diagnostics/verify_build.py \
+            /tmp/roba-diagnostic-west/build-restore/zephyr/.config \
+            /tmp/roba-diagnostic-west/build-diagnostic/zephyr/.config
+      - name: Package firmware and instructions
+        run: |
+          mkdir -p artifacts/diagnostic artifacts/restore
+          cp /tmp/roba-diagnostic-west/build-diagnostic/zephyr/zmk.uf2 artifacts/diagnostic/roBa_R-diagnostic.uf2
+          cp /tmp/roba-diagnostic-west/build-restore/zephyr/zmk.uf2 artifacts/restore/roBa_R-restore.uf2
+          cp diagnostics/collect.py diagnostics/README.md artifacts/diagnostic/
+          cp diagnostics/RESTORE.md artifacts/restore/README.md
+          git rev-parse HEAD > artifacts/diagnostic/source-commit.txt
+          cp artifacts/diagnostic/source-commit.txt artifacts/restore/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roba-diagnostic
+          path: artifacts/diagnostic
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roba-restore
+          path: artifacts/restore

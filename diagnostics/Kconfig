@@ -1,0 +1,4 @@
+config ROBA_DIAGNOSTICS
+    bool "roBa trackball diagnostic counters"
+    depends on PMW3610 && ZMK_POINTING && USB_CDC_ACM
+    default n
