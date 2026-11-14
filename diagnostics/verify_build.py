@@ -11,7 +11,7 @@ def config(path):
 
 
 def verify(normal, diagnostic):
-    for key in ('CONFIG_LOG', 'CONFIG_PRINTK', 'CONFIG_CONSOLE', 'CONFIG_ZMK_STUDIO',
+    for key in ('CONFIG_LOG', 'CONFIG_PRINTK', 'CONFIG_CONSOLE', 'CONFIG_BOOT_BANNER', 'CONFIG_ZMK_STUDIO',
                 'CONFIG_ZMK_USB_LOGGING', 'CONFIG_ZMK_RTT_LOGGING'):
         if diagnostic.get(key, 'n') != 'n':
             raise ValueError(f"Privacy check failed: {key}")

@@ -122,7 +122,8 @@ class BuildGuardTests(unittest.TestCase):
         verify.verify(self.normal, self.diagnostic)
 
     def test_rejects_logging_or_studio(self):
-        for key in ('CONFIG_LOG', 'CONFIG_PRINTK', 'CONFIG_CONSOLE', 'CONFIG_ZMK_STUDIO'):
+        for key in ('CONFIG_LOG', 'CONFIG_PRINTK', 'CONFIG_CONSOLE', 'CONFIG_BOOT_BANNER',
+                    'CONFIG_ZMK_STUDIO'):
             with self.subTest(key=key), self.assertRaises(ValueError):
                 verify.verify(self.normal, dict(self.diagnostic, **{key: 'y'}))
 
